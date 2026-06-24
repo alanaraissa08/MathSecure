@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathSecure - Matemática das Senhas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>🔐 MathSecure</h1>
+            <p>A Matemática por trás das Senhas Seguras</p>
+        </header>
+
+        <!-- SEÇÃO 1: INTRODUÇÃO MATEMÁTICA -->
+        <section class="card introducao">
+            <h2>🧮 A Matemática das Senhas</h2>
+            <div class="math-content">
+                <div class="formula">
+                    <h3>Fórmula Fundamental</h3>
+                    <p class="equacao">N = C<sup>L</sup></p>
+                    <ul>
+                        <li><strong>N</strong> = Número total de combinações possíveis</li>
+                        <li><strong>C</strong> = Tamanho do alfabeto (caracteres disponíveis)</li>
+                        <li><strong>L</strong> = Comprimento da senha</li>
+                    </ul>
+                </div>
+                <div class="exemplo-math">
+                    <h3>Exemplo Prático</h3>
+                    <p>Senha com 8 caracteres usando 95 caracteres possíveis:</p>
+                    <p class="destaque">95⁸ = 6,63 × 10¹⁵ combinações</p>
+                    <p style="opacity:0.7;font-size:0.9rem;">Tempo para quebrar: ~77 dias (1 bilhão tentativas/segundo)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: ANALISADOR DE SENHAS -->
+        <section class="card analisador">
+            <h2>🔍 Analisador de Senhas</h2>
+            <div class="input-group">
+                <input type="text" id="senhaInput" placeholder="Digite uma senha para analisar..." oninput="analisarSenha()">
+                <button onclick="gerarSenhaForte()" class="btn-gerar">🎲 Gerar Senha Forte</button>
+            </div>
+            
+            <div id="resultadoAnalise">
+                <div class="metricas">
+                    <div class="metrica">
+                        <span>📏 Comprimento</span>
+                        <span id="comprimentoValor">0</span>
+                    </div>
+                    <div class="metrica">
+                        <span>🔤 Alfabeto</span>
+                        <span id="alfabetoValor">0</span>
+                    </div>
+                    <div class="metrica">
+                        <span>🔢 Combinações</span>
+                        <span id="combinacoesValor">0</span>
+                    </div>
+                    <div class="metrica">
+                        <span>⏱️ Tempo para quebrar</span>
+                        <span id="tempoValor">0s</span>
+                    </div>
+                </div>
+                
+                <div class="forca-container">
+                    <div class="forca-label">
+                        <span>💪 Nível de Segurança</span>
+                        <span id="nivelForca">Fraca</span>
+                    </div>
+                    <div class="barra-forca">
+                        <div id="barraNivel" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Detalhes matemáticos -->
+                <div id="detalhesMatematicos" style="display:none;margin-top:15px;padding:15px;background:rgba(0,0,0,0.2);border-radius:8px;">
+                    <h4>📐 Detalhes Matemáticos</h4>
+                    <p id="detalhesTexto"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: COMPARADOR DE SENHAS -->
+        <section class="card comparador">
+            <h2>⚖️ Comparador de Senhas</h2>
+            <div class="comparador-grid">
+                <div class="senha-compare">
+                    <h4>Senha 1</h4>
+                    <input type="text" id="senha1" placeholder="Digite a senha 1" oninput="compararSenhas()">
+                    <div id="resultado1" class="compare-result"></div>
+                </div>
+                <div class="senha-compare">
+                    <h4>Senha 2</h4>
+                    <input type="text" id="senha2" placeholder="Digite a senha 2" oninput="compararSenhas()">
+                    <div id="resultado2" class="compare-result"></div>
+                </div>
+            </div>
+            <div id="comparacaoResultado" class="comparacao-final"></div>
+        </section>
+
+        <!-- SEÇÃO 4: HISTÓRICO DE ANÁLISES -->
+        <section class="card historico">
+            <h2>📜 Histórico de Análises</h2>
+            <div class="historico-controls">
+                <span>Total: <strong id="totalAnalises">0</strong> análises</span>
+                <button onclick="limparHistorico()" class="btn-danger">🗑️ Limpar</button>
+            </div>
+            <ul id="listaHistorico"></ul>
+        </section>
+
+        <!-- SEÇÃO 5: REFLEXÃO SOBRE IA -->
+        <section class="card ia-section">
+            <h2>🤖 IA na Segurança Digital</h2>
+            <div class="ia-content">
+                <div class="ia-grid">
+                    <div class="ia-card">
+                        <h3>💡 Insights da IA</h3>
+                        <ul id="listaInsights"></ul>
+                        <button onclick="gerarInsightIA()" class="btn-ia">✨ Gerar Insight</button>
+                    </div>
+                    <div class="ia-card">
+                        <h3>📊 Análise Inteligente</h3>
+                        <p id="analiseIA">Clique para analisar suas senhas com IA</p>
+                        <button onclick="analiseInteligente()" class="btn-ia">🧠 Analisar com IA</button>
+                    </div>
+                </div>
+                <div class="ia-stats">
+                    <span>🧠 Insights gerados: <strong id="contadorInsights">0</strong></span>
+                    <span>📈 Recomendações: <strong id="recomendacoesIA">0</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 6: DICAS DE SEGURANÇA -->
+        <section class="card dicas">
+            <h2>💡 Dicas para Senhas Fortes</h2>
+            <div id="listaDicas"></div>
+        </section>
+
+        <footer>
+            <p>🔐 MathSecure 2026 - Segurança Digital com Matemática e IA</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
